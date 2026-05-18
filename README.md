@@ -1,5 +1,7 @@
 # zfy
 
+[![CI](https://github.com/EssentialsDev/zfy-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/EssentialsDev/zfy-cli/actions/workflows/ci.yml)
+
 Open-source, third-party CLI, TypeScript SDK, and **MCP server** for the [Zeffy API](https://www.zeffy.com/integration/api) — built so nonprofits can automate donation reporting and AI agents can answer questions like *"draft tax receipts for everyone who gave over $250 in 2025."*
 
 > Not affiliated with Zeffy. Uses the official free public read-only API (Payments, Contacts, Campaigns) introduced in 2025.
