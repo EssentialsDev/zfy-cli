@@ -32,12 +32,12 @@ Read-only by design â€” `zfy` cannot modify your Zeffy data, because the officia
 ## Install
 
 ```bash
-npm i -g @essentialsdev/zfy-cli
+npm i -g @devessentials/zfy-cli
 # or run without installing:
-npx --package=@essentialsdev/zfy-cli zfy --help
+npx --package=@devessentials/zfy-cli zfy --help
 ```
 
-The package is `@essentialsdev/zfy-cli` on npm; the binary is `zfy` and the MCP entry point is `zfy-mcp`. Node.js 20+ required.
+The package is `@devessentials/zfy-cli` on npm; the binary is `zfy` and the MCP entry point is `zfy-mcp`. Node.js 20+ required.
 
 ## Authenticate
 
@@ -168,7 +168,7 @@ PDF and CSV output aren't exposed via MCP (binary data is awkward over stdio) â€
 Everything the CLI does is available as a typed library, including the EOY aggregation and the format renderers.
 
 ```ts
-import { Zeffy } from "@essentialsdev/zfy-cli";
+import { Zeffy } from "@devessentials/zfy-cli";
 
 const zeffy = new Zeffy(process.env.ZEFFY_API_KEY!);
 
@@ -181,7 +181,7 @@ for await (const p of zeffy.payments.iterate({ created_gte: 1735689600 })) {
 }
 
 // Build and render an EOY report yourself
-import { buildEoyReport, formatMarkdown, writePdfReceipts } from "@essentialsdev/zfy-cli";
+import { buildEoyReport, formatMarkdown, writePdfReceipts } from "@devessentials/zfy-cli";
 
 const report = await buildEoyReport(zeffy, {
   year: 2025,
