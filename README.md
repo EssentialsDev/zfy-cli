@@ -7,10 +7,12 @@ Open-source, third-party CLI, TypeScript SDK, and **MCP server** for the [Zeffy 
 ## Install
 
 ```bash
-npm i -g zfy
+npm i -g zfy-cli
 # or run without installing:
-npx zfy --help
+npx zfy-cli --help
 ```
+
+The package is `zfy-cli` on npm; the binary is `zfy`.
 
 Node.js 20+ required.
 
@@ -90,7 +92,7 @@ After installing and configuring, ask your agent things like:
 ## SDK usage
 
 ```ts
-import { Zeffy } from "zfy";
+import { Zeffy } from "zfy-cli";
 
 const zeffy = new Zeffy(process.env.ZEFFY_API_KEY!);
 
@@ -103,7 +105,7 @@ for await (const p of zeffy.payments.iterate({ created_gte: 1735689600 })) {
 }
 
 // Build EOY report from your own code
-import { buildEoyReport, formatMarkdown } from "zfy";
+import { buildEoyReport, formatMarkdown } from "zfy-cli";
 const report = await buildEoyReport(zeffy, { year: 2025, timezone: "America/Los_Angeles" });
 console.log(formatMarkdown(report, 25));
 ```
