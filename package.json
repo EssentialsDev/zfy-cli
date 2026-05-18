@@ -1,0 +1,62 @@
+{
+  "name": "zfy",
+  "version": "0.1.0",
+  "description": "Third-party CLI, SDK, and MCP server for the Zeffy API — donation reports for nonprofits and AI agents.",
+  "keywords": [
+    "zeffy",
+    "nonprofit",
+    "donations",
+    "fundraising",
+    "cli",
+    "mcp",
+    "ai-agents"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "zfy": "./dist/cli/index.js",
+    "zfy-mcp": "./dist/mcp/server.js"
+  },
+  "main": "./dist/sdk/index.js",
+  "types": "./dist/sdk/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/sdk/index.d.ts",
+      "import": "./dist/sdk/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build && pnpm test && pnpm typecheck"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "commander": "^12.1.0",
+    "csv-stringify": "^6.5.2",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "pdfkit": "^0.15.1",
+    "picocolors": "^1.1.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pdfkit": "^0.13.9",
+    "msw": "^2.7.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
