@@ -72,11 +72,13 @@ zfy auth set
 # pastes the prompt: paste your sk_… key, press Enter
 ```
 
-This stores it in `~/.config/zfy/config.json` with restrictive permissions (mode 0600 — only you can read it). Verify the key works:
+This stores the key in your user config directory with restrictive permissions (mode 0600 — only you can read it). On most systems that's `~/.config/zfy/config.json`; if you set `XDG_CONFIG_HOME`, it lives under there instead. Run `zfy auth path` any time to see the exact location.
+
+Verify the key works:
 
 ```bash
 zfy auth status
-# ✓ Authenticated.
+# Authenticated.
 # Sample campaign: Annual Fund 2025
 ```
 
@@ -264,13 +266,13 @@ The client handles 429 rate-limit responses (token bucket capped at 90 req/min, 
 ## Troubleshooting
 
 **`zsh: command not found: zfy`** (or `bash: zfy: command not found`)
-Your shell can't find the binary that `npm install -g` just placed on disk. Run `npm root -g` to see where global packages live, then make sure that directory's `bin` is on your `PATH`. If you used `nvm`, switching Node versions changes the location — re-run the install after switching.
+Your shell can't find the binary that `npm install -g` just placed on disk. Run `npm prefix -g` to print your global install prefix (e.g. `/usr/local` or `~/.nvm/versions/node/v22.x.x`), then make sure `<prefix>/bin` is on your `PATH`. If you used `nvm`, switching Node versions changes the prefix — re-run the install after switching.
 
 **`No Zeffy API key configured.`**
 You haven't run `zfy auth set` yet, and `ZEFFY_API_KEY` isn't set in your environment. Run `zfy auth set` and paste the key when prompted.
 
-**`Zeffy API error 401: Invalid API key`**
-The key zfy has stored doesn't match what Zeffy expects. Either the key was regenerated (in which case run `zfy auth clear && zfy auth set` with the new one) or you copy/pasted with extra whitespace. Try `zfy auth status` to see the full error.
+**`API error 401: Invalid API key`** (or `Zeffy API error 401: ...` from other commands)
+The key zfy has stored doesn't match what Zeffy expects. Either the key was regenerated (in which case run `zfy auth clear && zfy auth set` with the new one) or you copy/pasted with extra whitespace. `zfy auth status` is the simplest way to confirm — it hits the API and reports the failure.
 
 **`Zeffy API error 429: Too Many Requests`**
 You're hitting Zeffy's 100-requests-per-minute cap. zfy already throttles to 90/min and backs off on 429s, so this usually means something else on the same key is also calling the API. Wait a minute and retry.
@@ -278,8 +280,8 @@ You're hitting Zeffy's 100-requests-per-minute cap. zfy already throttles to 90/
 **"Where did my PDFs go?"**
 `zfy report eoy --format pdf` writes to the directory passed via `--out`, or — if `--out` is omitted — to `./eoy-<year>-receipts/` in your current working directory. The CLI prints the destination to stderr after it finishes.
 
-**`zfy: skipping logo — image is not square (400×100)`**
-Your `--logo` image violates the [logo spec](#logo-spec-for---logo). zfy continues without the logo so a bad asset doesn't block the rest of the report. Crop your image to a square in any image editor and rerun.
+**`zfy: skipping logo — image is not square (400×100); supply a square PNG/JPEG (e.g. 512×512)`**
+Your `--logo` image violates the [logo spec](#logo-spec-for---logo). zfy continues without the logo so a bad asset doesn't block the rest of the report. Crop your image to a square in any image editor and rerun. Other variants of this message (file too large, too small, unsupported format) all skip the logo the same way.
 
 **Want more detail on an error?**
 Re-run with `DEBUG=1`:
@@ -295,7 +297,7 @@ git clone https://github.com/EssentialsDev/zfy-cli.git
 cd zfy-cli
 pnpm install
 pnpm build         # tsup → dist/
-pnpm test          # vitest (21 tests)
+pnpm test          # vitest
 pnpm typecheck     # tsc --noEmit
 ```
 
