@@ -26,6 +26,8 @@ export function reportCommand(): Command {
     .option("--include-refunded", "Include refunded payments (excluded by default)")
     .option("--top <n>", "Markdown: limit donor table to top N", (v) => Number(v))
     .option("--org <name>", "PDF: organization name for the header")
+    .option("--logo <path>", "PDF: path to a square PNG/JPEG logo (~512×512, max 2 MB)")
+    .option("--logo-size <pt>", "PDF: edge length of the square logo slot in points (default 64)", (v) => Number(v))
     .option("--receipt-text <text>", "PDF: override receipt boilerplate")
     .action(async (opts: Record<string, string | number | boolean | undefined>) => {
       const year = opts["year"] as number;
@@ -50,6 +52,8 @@ export function reportCommand(): Command {
         const written = await writePdfReceipts(report, dir, {
           orgName: opts["org"] as string | undefined,
           receiptText: opts["receiptText"] as string | undefined,
+          logoPath: opts["logo"] as string | undefined,
+          logoSize: typeof opts["logoSize"] === "number" ? (opts["logoSize"] as number) : undefined,
         });
         console.error(pc.green(`Wrote ${written.length} receipts to ${dir}`));
         return;

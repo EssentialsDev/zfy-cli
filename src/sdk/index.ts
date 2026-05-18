@@ -13,6 +13,15 @@ export type { ContactListFilters } from "./contacts.js";
 export type { CampaignListFilters } from "./campaigns.js";
 export * from "./schemas.js";
 
+// Report module — usable from your own code, not just the CLI
+export { buildEoyReport } from "../report/eoy.js";
+export type { EoyReport, EoyDonor, EoyDonorPayment, EoyOptions } from "../report/eoy.js";
+export { formatJson } from "../report/formats/json.js";
+export { formatCsv } from "../report/formats/csv.js";
+export { formatMarkdown } from "../report/formats/md.js";
+export { writePdfReceipts, renderDonorPdf, validateLogo } from "../report/formats/pdf.js";
+export type { PdfOptions, LogoValidation } from "../report/formats/pdf.js";
+
 export class Zeffy {
   readonly client: ZeffyClient;
   readonly payments: PaymentsResource;
