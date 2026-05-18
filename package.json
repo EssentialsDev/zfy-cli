@@ -1,5 +1,5 @@
 {
-  "name": "zfy-cli",
+  "name": "@essentialsdev/zfy-cli",
   "version": "0.1.0",
   "description": "Third-party CLI, SDK, and MCP server for the Zeffy API — donation reports for nonprofits and AI agents.",
   "keywords": [
@@ -12,6 +12,15 @@
     "ai-agents"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EssentialsDev/zfy-cli.git"
+  },
+  "bugs": "https://github.com/EssentialsDev/zfy-cli/issues",
+  "homepage": "https://github.com/EssentialsDev/zfy-cli#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "engines": {
     "node": ">=20"

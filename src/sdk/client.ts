@@ -72,7 +72,7 @@ export class ZeffyClient {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
           Accept: "application/json",
-          "User-Agent": "zfy-cli/0.1.0 (+https://github.com/zfy/zfy)",
+          "User-Agent": "zfy-cli/0.1.0 (+https://github.com/EssentialsDev/zfy-cli)",
         },
       });
 
