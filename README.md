@@ -23,6 +23,7 @@ Read-only by design — `zfy` cannot modify your Zeffy data, because the officia
 - [Quick start (5 minutes)](#quick-start-5-minutes)
 - [CLI commands](#cli-commands)
   - [End-of-year report](#end-of-year-report)
+    - [What the PDF receipts look like](#what-the-pdf-receipts-look-like)
   - [Logo spec for `--logo`](#logo-spec-for---logo)
 - [Optional: use from Claude or other AI agents (MCP)](#optional-use-from-claude-or-other-ai-agents-mcp)
 - [SDK usage](#sdk-usage)
@@ -165,7 +166,7 @@ zfy report eoy --year 2025 --format md --out eoy-2025.md --top 50
 # One PDF receipt per donor (with optional logo)
 zfy report eoy --year 2025 --format pdf --out ./receipts/ \
                --org "Friends of the Library" \
-               --logo ./logo.png --logo-size 64 \
+               --logo ./logo.png --logo-size 48 \
                --timezone America/Los_Angeles
 ```
 
@@ -180,10 +181,20 @@ zfy report eoy --year 2025 --format pdf --out ./receipts/ \
 | `--top <n>` | Markdown: limit donor table. |
 | `--org <name>` | PDF: organization name in the header. |
 | `--logo <path>` | PDF: square PNG/JPEG mark — see spec below. |
-| `--logo-size <pt>` | PDF: edge length of the logo slot in [PDF points](https://en.wikipedia.org/wiki/Point_(typography)) (default 64; 72 pt ≈ 1 inch). |
+| `--logo-size <pt>` | PDF: edge length of the logo slot in [PDF points](https://en.wikipedia.org/wiki/Point_(typography)) (default 48; 72 pt ≈ 1 inch). |
 | `--receipt-text <txt>` | PDF: override the default tax-receipt boilerplate. |
 
 Run `zfy report eoy --help` for the complete list.
+
+#### What the PDF receipts look like
+
+<p align="center">
+  <a href="examples/sample-receipt.pdf">
+    <img src="examples/sample-receipt.png" alt="Sample EOY donation receipt rendered by zfy" width="600">
+  </a>
+  <br>
+  <em><a href="examples/sample-receipt.pdf">Download the sample PDF</a> · regenerate with <code>pnpm build &amp;&amp; node examples/gen-sample-receipt.mjs</code></em>
+</p>
 
 ### Logo spec for `--logo`
 
