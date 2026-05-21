@@ -1,5 +1,6 @@
 // Generates a sample EOY receipt PDF using the real renderer.
-// Run: node examples/gen-sample-receipt.mjs [outPath]
+// Requires the package to be built first (imports from ../dist/sdk).
+// Run: pnpm build && node examples/gen-sample-receipt.mjs [outPath]
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeFile } from "node:fs/promises";

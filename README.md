@@ -189,11 +189,11 @@ Run `zfy report eoy --help` for the complete list.
 #### What the PDF receipts look like
 
 <p align="center">
-  <a href="examples/sample-receipt.pdf">
-    <img src="examples/sample-receipt.png" alt="Sample EOY donation receipt rendered by zfy" width="600">
+  <a href="https://github.com/EssentialsDev/zfy-cli/blob/main/examples/sample-receipt.pdf">
+    <img src="https://raw.githubusercontent.com/EssentialsDev/zfy-cli/main/examples/sample-receipt.png" alt="Sample EOY donation receipt rendered by zfy" width="600">
   </a>
   <br>
-  <em><a href="examples/sample-receipt.pdf">Download the sample PDF</a> · regenerate with <code>pnpm build &amp;&amp; node examples/gen-sample-receipt.mjs</code></em>
+  <em><a href="https://github.com/EssentialsDev/zfy-cli/blob/main/examples/sample-receipt.pdf">Download the sample PDF</a> · regenerate with <code>pnpm build &amp;&amp; node examples/gen-sample-receipt.mjs</code></em>
 </p>
 
 ### Logo spec for `--logo`

@@ -10,7 +10,7 @@ export interface PdfOptions {
   receiptText?: string;
   /** Path to a square PNG or JPEG logo. See validateLogo() for the spec. */
   logoPath?: string;
-  /** Edge length in pt for the square logo slot (default 64). */
+  /** Edge length in pt for the square logo slot (default 48). */
   logoSize?: number;
   /** Stream to write validation warnings to. Defaults to process.stderr. */
   warnStream?: { write(s: string): void };
