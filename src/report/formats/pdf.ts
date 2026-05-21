@@ -10,7 +10,7 @@ export interface PdfOptions {
   receiptText?: string;
   /** Path to a square PNG or JPEG logo. See validateLogo() for the spec. */
   logoPath?: string;
-  /** Edge length in pt for the square logo slot (default 64). */
+  /** Edge length in pt for the square logo slot (default 48). */
   logoSize?: number;
   /** Stream to write validation warnings to. Defaults to process.stderr. */
   warnStream?: { write(s: string): void };
@@ -19,7 +19,7 @@ export interface PdfOptions {
 const LOGO_MAX_BYTES = 2 * 1024 * 1024;
 const LOGO_MIN_PIXELS = 64;
 const LOGO_ASPECT_TOLERANCE = 0.1; // ±10% off 1:1 is still accepted as "square"
-const DEFAULT_LOGO_SIZE = 64;
+const DEFAULT_LOGO_SIZE = 48;
 
 export type LogoValidation =
   | { ok: true; width: number; height: number; format: "png" | "jpeg" }
@@ -177,6 +177,7 @@ export function renderDonorPdf(
 
     const headerY = doc.y;
     const logoSize = opts.logoSize ?? DEFAULT_LOGO_SIZE;
+    const logoGutter = opts.logoPath ? logoSize + 14 : 0;
     if (opts.logoPath) {
       try {
         doc.image(opts.logoPath, left, headerY, { fit: [logoSize, logoSize] });
@@ -185,21 +186,27 @@ export function renderDonorPdf(
       }
     }
 
+    const textX = left + logoGutter;
+    const textWidth = usable - logoGutter;
     doc
       .font("Helvetica-Bold")
       .fontSize(20)
       .fillColor("black")
-      .text(orgName, left + (opts.logoPath ? logoSize + 14 : 0), headerY + 4, {
-        width: usable,
+      .text(orgName, textX, headerY + 4, {
+        width: textWidth,
       });
     doc
       .font("Helvetica")
       .fontSize(9)
       .fillColor(MUTED)
-      .text(`OFFICIAL DONATION RECEIPT · ${report.year}`, {
+      .text(`OFFICIAL DONATION RECEIPT · ${report.year}`, textX, doc.y, {
+        width: textWidth,
         characterSpacing: 1.2,
       });
 
+    // Make sure the next section starts below the logo, not on top of it.
+    doc.x = left;
+    doc.y = Math.max(doc.y, headerY + logoSize);
     doc.moveDown(1.5);
     doc.fillColor("black");
 
